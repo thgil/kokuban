@@ -9,18 +9,26 @@ class Deck extends Component {
 		super(props);
 		
 		this.state = {
-			data: [{title:'test1'},{title:'test2'},{title:'test3'}],
+			data: [ {title:'test0'},{title:'test1'},{title:'test2'},
+							{title:'test3'},{title:'test4'},{title:'test5'} ],
 			selected: 0
 		}
 	}
 	
 	componentDidMount() {
-		
+		const id = Number(this.props.match.params.id);
+		if(id) this.selectCard(id);
+		console.log(this.state.selected);
 	}   
 	
 	selectCard(num) {
-		if(num < 0 || num >= this.state.data.length) return;
+		if(num < 0 || num >= this.state.data.length) {
+			console.warn('Selected card does not exist')
+			return;
+		}
 		this.setState({ selected: num });
+		// Update the url with the current card id
+		this.props.history.push('/'+num);
 	}
 	
 	prev = () => {
@@ -41,6 +49,7 @@ class Deck extends Component {
 			<p>
 			This is the DECK Component.
 			</p>
+			<small>Selected card: { selected }</small>
 			<Card card={data[selected]} />
 			<Button color="primary" onClick={this.prev}>Prev</Button>
 			<Button color="primary" onClick={this.next}>Next</Button>

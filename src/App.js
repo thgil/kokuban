@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route} from "react-router-dom";
 import './App.css';
-import { Container, Row, Col } from 'reactstrap';
+import { Container } from 'reactstrap';
 import Deck from './Components/Deck';
 import NavbarFull from './Components/NavbarFull';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <NavbarFull/>
-        <Container>
-          <Deck/>
-        </Container>
-      </div>
+      <Router>
+        <div className="App">
+          <NavbarFull/>
+          <Container>
+            <Route path="/:id" component={Deck} />
+          </Container>
+        </div>
+      </Router>
     );
   }
 }

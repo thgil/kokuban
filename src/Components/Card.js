@@ -20,6 +20,9 @@ class Card extends Component {
       <div className="Card">
         <Row>
           <Col>
+            <p>
+              This is the Card Component.
+            </p>
             { card.title }
           </Col>
         </Row>
