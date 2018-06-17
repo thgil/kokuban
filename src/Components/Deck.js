@@ -16,12 +16,28 @@ class Deck extends Component {
 	}
 	
 	componentDidMount() {
+		// Update the card id to match the url param if exists
 		const id = Number(this.props.match.params.id);
 		if(id) this.selectCard(id);
-		console.log(this.state.selected);
-	}   
+
+		document.addEventListener('keydown', this.handleKeyDown);
+	}
 	
+	componentWillUnmount() {
+		document.removeEventListener('keydown', this.handleKeyDown);
+	}
+	
+	componentWillReceiveProps(newProps) {
+		// Update the card id if the url changes
+		this.setState({ selected: Number(newProps.match.params.id) });
+	}
+
+	handleKeyDown = (event) => {
+		if(event.keyCode == 32) this.nextCard();
+	}
+
 	selectCard(num) {
+		// Check card id is in the array
 		if(num < 0 || num >= this.state.data.length) {
 			console.warn('Selected card does not exist')
 			return;
@@ -31,12 +47,12 @@ class Deck extends Component {
 		this.props.history.push('/'+num);
 	}
 	
-	prev = () => {
+	prevCard = () => {
 		const prev = this.state.selected - 1;
 		this.selectCard(prev);
 	}
 	
-	next = () => {
+	nextCard = () => {
 		const next = this.state.selected + 1;
 		this.selectCard(next);
 	}
@@ -49,10 +65,12 @@ class Deck extends Component {
 			<p>
 			This is the DECK Component.
 			</p>
-			<small>Selected card: { selected }</small>
+			<p>
+			<small>Location: <b>{this.props.location.pathname}</b> Match: <b>{this.props.match.params.id}</b> Selected card: <b>{ selected }</b></small>
+			</p>
 			<Card card={data[selected]} />
-			<Button color="primary" onClick={this.prev}>Prev</Button>
-			<Button color="primary" onClick={this.next}>Next</Button>
+			<Button color="primary" onClick={this.prevCard}>Prev</Button>
+			<Button color="primary" onClick={this.nextCard}>Next</Button>
 			</div>
 		);
 	}
