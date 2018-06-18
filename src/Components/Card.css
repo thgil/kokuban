@@ -1,3 +1,13 @@
 .Card {
     border: 1px solid black;
+    margin: 25px;
+    padding: 25px;
+}
+
+.Card .Primary {
+    font-size: 3rem;
+}
+
+.Card .Secondary {
+    font-size: 2rem
 }

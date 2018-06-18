@@ -20,10 +20,9 @@ class Card extends Component {
       <div className="Card">
         <Row>
           <Col>
-            <p>
-              This is the Card Component.
-            </p>
-            { card.title }
+            <div className="Primary">{ card.primary }</div>
+            <div className="Secondary">{ card.secondary }</div>
+
           </Col>
         </Row>
       </div>

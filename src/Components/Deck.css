@@ -1,3 +1,5 @@
 .Deck {
     border: 1px solid black;
+    padding: 25px;
+    margin: 25px 0;
 }

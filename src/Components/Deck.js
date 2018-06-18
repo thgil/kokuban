@@ -9,8 +9,12 @@ class Deck extends Component {
 		super(props);
 		
 		this.state = {
-			data: [ {title:'test0'},{title:'test1'},{title:'test2'},
-							{title:'test3'},{title:'test4'},{title:'test5'} ],
+			data: [ {primary:'お元気ですか', secondary:'How are you?'},
+							{primary:'お疲れ様です', secondary:'Thanks for today'},
+							{primary:'よろしくお願いします', secondary:'Nice to meet you.'},
+							{primary:'いらっしゃいませ', secondary:'Welcome'},
+							{primary:'いってきます', secondary:'I\'m leaving'},
+							{primary:'いってらっしゃい', secondary:'See you. Take care'} ],
 			selected: 0
 		}
 	}
@@ -62,15 +66,13 @@ class Deck extends Component {
 		
 		return(
 			<div className="Deck">
-			<p>
-			This is the DECK Component.
-			</p>
-			<p>
-			<small>Location: <b>{this.props.location.pathname}</b> Match: <b>{this.props.match.params.id}</b> Selected card: <b>{ selected }</b></small>
-			</p>
-			<Card card={data[selected]} />
-			<Button color="primary" onClick={this.prevCard}>Prev</Button>
-			<Button color="primary" onClick={this.nextCard}>Next</Button>
+				<p>
+					This is the DECK Component.
+				</p>
+				<Card card={data[selected]} />
+				<Button color="primary" onClick={this.prevCard}>Prev</Button>
+			 	<span> </span>
+				<Button color="primary" onClick={this.nextCard}>Next</Button>
 			</div>
 		);
 	}
